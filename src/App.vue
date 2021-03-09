@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       industries:[{
-        image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/Industrial-Markets-MetalFab.jpg',
+        image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/industria-right.png',
         name: 'METAL FABRICATION'
       },
       {

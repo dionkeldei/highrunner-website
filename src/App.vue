@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <industry/>
+    <industry v-for="(industry,i) in industries" :key="i" :industry="industry"/>
   </div>
 </template>
 
@@ -13,6 +13,15 @@ export default {
   name: 'App',
   components: {
     industry
+  },
+  data () {
+    return {
+      industries:[{
+        image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/Industrial-Markets-MetalFab.jpg',
+        name: 'METAL FABRICATION'
+      }]
+
+    }
   }
 }
 </script>

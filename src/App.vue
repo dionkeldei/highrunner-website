@@ -21,21 +21,23 @@ export default {
   },
   data () {
     return {
-      industries:[{
+      /*industries:[{
         image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/industria-right.png',
         name: 'METAL FABRICATION'
       },
       {
         image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/industria-left.png',
         name: 'Segundo industria'
-      }]
-
+      }]*/
     }
+  },
+  props: {
+    industries: Array
   }
 }
 </script>
 
 <style lang="scss">
-@import 'assets/scss/app.scss';
+//@import 'assets/scss/app.scss';
 [v-cloak] { display: none; }
 </style>

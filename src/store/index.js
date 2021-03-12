@@ -55,7 +55,6 @@ export default new Vuex.Store({
         axios.get(url)
           .then(function (response) {
             industries[i]['families'] = response.data
-            console.log(industries[i])
           })
           .catch(function (error) {
             // handle error

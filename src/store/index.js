@@ -12,6 +12,9 @@ export default new Vuex.Store({
     products: {}
   },
   mutations: {
+    updateIndustry: function (state, data) {
+      state.industries = data
+    }
   },
   actions: {
     getIndustries: function (context, data = undefined) {
@@ -22,11 +25,12 @@ export default new Vuex.Store({
       axios.get(url)
         .then(function (response) {
           // handle success
-          context.state.industries = response.data;
+          context.commit('updateIndustry', response.data)
+          context.dispatch('getIndustriesFamilies')
         })
         .catch(function (error) {
           // handle error
-          console.log(error);
+          console.log(error)
         })
     },
     getFamilies: function (context, data = undefined) {
@@ -43,6 +47,23 @@ export default new Vuex.Store({
           // handle error
           console.log(error);
         })
+    },
+    getIndustriesFamilies: function (context) {
+      var industries = context.state.industries
+      for(var i in industries){
+        var url = 'https://demo.high-runner.com/wp-json/wp/v2/families?industries='+industries[i].id
+        axios.get(url)
+          .then(function (response) {
+            industries[i]['families'] = response.data
+            console.log(industries[i])
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+      }
+
+      context.commit('updateIndustry', industries)
     },
     getProducts: function (context, data = undefined) {
       var url = 'https://demo.high-runner.com/wp-json/wp/v2/products'

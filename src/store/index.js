@@ -7,13 +7,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    ready: false,
     industries: {},
-    families: {},
-    products: {}
+    key: 0
   },
   mutations: {
-    updateIndustry: function (state, data) {
+    updateIndustries: function (state, data) {
       state.industries = data
+    },
+    updateIndustry: function (state, data) {
+      state.industries[data.key]['families'] = data.data
+      state.key += 1
+    },
+    ready: function (state) {
+      state.ready = true
     }
   },
   actions: {
@@ -25,7 +32,7 @@ export default new Vuex.Store({
       axios.get(url)
         .then(function (response) {
           // handle success
-          context.commit('updateIndustry', response.data)
+          context.commit('updateIndustries', response.data)
           context.dispatch('getIndustriesFamilies')
         })
         .catch(function (error) {
@@ -49,20 +56,30 @@ export default new Vuex.Store({
         })
     },
     getIndustriesFamilies: function (context) {
+      var length = context.state.industries.length
       var industries = context.state.industries
-      for(var i in industries){
+      var i = context.state.key
+      var obj = {}
+      if(i < length){
         var url = 'https://demo.high-runner.com/wp-json/wp/v2/families?industries='+industries[i].id
         axios.get(url)
           .then(function (response) {
-            industries[i]['families'] = response.data
+            obj = {
+              'key': i,
+              'data': response.data
+            }
+            context.commit('updateIndustry', obj)
+            context.dispatch('getIndustriesFamilies')
           })
           .catch(function (error) {
             // handle error
             console.log(error);
           })
+      }else{
+        console.log('entro')
+        context.commit('ready')
       }
 
-      context.commit('updateIndustry', industries)
     },
     getProducts: function (context, data = undefined) {
       var url = 'https://demo.high-runner.com/wp-json/wp/v2/products'

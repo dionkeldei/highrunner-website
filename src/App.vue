@@ -19,20 +19,16 @@ export default {
   created(){
     AOS.init()
   },
-  data () {
-    return {
-      ready: false
-    }
-  },
   computed: {
     industries: function () {
       return this.$store.state.industries
+    },
+    ready: function () {
+      return this.$store.state.ready
     }
   },
   mounted () {
-    this.$store.dispatch('getIndustries').then(() => {
-      this.ready = true
-    })
+    this.$store.dispatch('getIndustries')
   }
 }
 </script>

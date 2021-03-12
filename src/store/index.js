@@ -76,7 +76,6 @@ export default new Vuex.Store({
             console.log(error);
           })
       }else{
-        console.log('entro')
         context.commit('ready')
       }
 

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import store from './store'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import industry from '@/components/industry.vue'
@@ -12,6 +13,7 @@ import UIkit from 'uikit'
 import Icons from 'uikit/dist/js/uikit-icons'
 UIkit.use(Icons)
 export default {
+  store,
   name: 'App',
   components: {
     industry
@@ -34,6 +36,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'assets/scss/app.scss';
+//@import 'assets/scss/app.scss';
 [v-cloak] { display: none; }
 </style>

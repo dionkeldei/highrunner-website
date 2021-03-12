@@ -1,6 +1,6 @@
 <template>
-  <div id="app" v-cloak>
-    <industry v-for="(industry,i) in industries" :key="i" :industry="industry" :number="i+1" style="margin-bottom: 40px;"/>
+  <div v-if="ready" id="app" v-cloak>
+    <industry v-for="(industry,i) in industryDivs" :key="i" :industry="industry" :number="i+1" style="margin-bottom: 40px;"/>
   </div>
 </template>
 
@@ -21,18 +21,32 @@ export default {
   },
   data () {
     return {
-      industries:[{
-        image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/industria-right.png',
-        name: 'METAL FABRICATION'
-      },
-      {
-        image: 'https://demo.high-runner.com/wp-content/uploads/2021/03/industria-left.png',
-        name: 'Segundo industria'
-      }]
+      ready: false
     }
   },
-  props: {
-    // industries: Array
+  computed: {
+    industries: function () {
+      return this.$store.state.industries
+    },
+    industryDivs: function () {
+      var obj = {}
+      var arr = []
+      for(var i in this.industries){
+        obj = {
+          'id': this.industries[i].id,
+          'name': this.industries[i].name,
+          'image': this.industries[i].acf['fondo-desktop'].url
+        }
+        arr.push(obj)
+      }
+
+      return arr
+    }
+  },
+  mounted () {
+    this.$store.dispatch('getIndustries').then(() => {
+      this.ready = true
+    })
   }
 }
 </script>

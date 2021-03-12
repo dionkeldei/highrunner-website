@@ -9,7 +9,7 @@
         <p class="uk-text-center">Ver productos</p>
         <p class="uk-text-center"><b><span :uk-icon="icon"></span></b></p>
       </div>
-      <dropdown v-if="clicked" :num="this.id"/>
+      <dropdown :style="displayDropdown" :num="this.id"/>
     </div>
 
     <div v-if="!isOdd(this.number)" @click="click()" class="uk-width-1-1 uk-flex uk-flex-middle industry-div" :style="backgroundColor" style="height:100%;margin-left:0px;" data-aos="fade-left" uk-grid>
@@ -21,7 +21,7 @@
       <div class="uk-width-2-3" style="height:100%;padding-left:0px;">
         <img :src="industry.acf['fondo-desktop'].url" :class="grayClass" style="max-height:100%"/>
       </div>
-      <dropdown v-if="clicked" :num="this.id"/>
+      <dropdown :style="displayDropdown" :num="this.id"/>
     </div>
 
 
@@ -83,6 +83,13 @@ export default {
         return 'gray-image'
       }
       return ''
+    },
+    displayDropdown: function () {
+      if(!this.clicked){
+        return 'display:none'
+      }else{
+        return ''
+      }
     }
   },
   components:{

@@ -1,6 +1,6 @@
 <template>
   <div v-if="ready" id="app" v-cloak>
-    <industry v-for="(industry,i) in industryDivs" :key="i" :industry="industry" :number="i+1" style="margin-bottom: 40px;"/>
+    <industry v-for="(industry,i) in industries" :key="i" :industry="industry" :number="i+1" style="margin-bottom: 40px;"/>
   </div>
 </template>
 
@@ -27,20 +27,6 @@ export default {
   computed: {
     industries: function () {
       return this.$store.state.industries
-    },
-    industryDivs: function () {
-      var obj = {}
-      var arr = []
-      for(var i in this.industries){
-        obj = {
-          'id': this.industries[i].id,
-          'name': this.industries[i].name,
-          'image': this.industries[i].acf['fondo-desktop'].url
-        }
-        arr.push(obj)
-      }
-
-      return arr
     }
   },
   mounted () {

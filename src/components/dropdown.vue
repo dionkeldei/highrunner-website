@@ -47,7 +47,6 @@ export default {
 
 <style lang="css" scoped>
 .image-icon{
-  border: solid 1px white;
   width:50%;
 }
 </style>

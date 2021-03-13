@@ -1,4 +1,4 @@
-# high-runners-index
+# highrunners-website
 
 ## Project setup
 ```

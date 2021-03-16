@@ -1,7 +1,7 @@
 <template lang="html">
   <div style="background:#000;color:#fff;padding-top: 20px;width:100%;margin-left:0px;" uk-grid>
      <div v-for="(family,i) in families" class="uk-width-1-2 uk-width-1-6@m" :key="i">
-       <a :href="family.link" style="color:white;text-decoration-none;">
+       <a :href="makeLink(family.link)" style="color:white;text-decoration-none;">
          <p class="uk-text-center"><img :src="checkIcon(family)" class="uk-width-1-1 image-icon"/></p>
          <p class="uk-text-center"><b>{{family.name}}</b></p>
        </a>
@@ -13,7 +13,8 @@
 export default {
   data () {
     return {
-      families: []
+      families: [],
+      industriesSlug: ''
     }
   },
   props: {
@@ -27,6 +28,7 @@ export default {
   mounted () {
     if(this.industries[this.num].families !== undefined){
       this.families = this.industries[this.num].families
+      this.industriesSlug = this.industries[this.num].slug
     }
   },
   watch: {
@@ -40,6 +42,9 @@ export default {
         return family.acf.icono.url
       }
       return ''
+    },
+    makeLink: function (link){
+      return link+'?industry='+this.industriesSlug
     }
   }
 }

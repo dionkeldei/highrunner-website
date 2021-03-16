@@ -1,7 +1,7 @@
 <template lang="html">
 <div>
    <!--right-->
-    <div v-if="isOdd(this.number)" @click="click()" class="uk-width-1-1 uk-flex uk-flex-middle industry-div uk-visible@m" :style="backgroundColor" style="height:100%;margin-left:0px;" data-aos="fade-right" uk-grid>
+    <div v-if="industry.acf.izquierda" @click="click()" class="uk-width-1-1 uk-flex uk-flex-middle industry-div uk-visible@m" :style="backgroundColor" style="height:100%;margin-left:0px;" data-aos="fade-right" uk-grid>
         <div class="uk-width-2-3" style="height:100%;padding-left:0px;">
           <img :src="industry.acf['fondo-desktop'].url" :class="grayClass" style="max-height:100%"/>
         </div>
@@ -14,7 +14,7 @@
     </div>
 
     <!--Left-->
-    <div v-if="!isOdd(this.number)" @click="click()" class="uk-width-1-1 uk-flex uk-flex-middle industry-div uk-visible@m" :style="backgroundColor" style="height:100%;margin-left:0px;" data-aos="fade-left" uk-grid>
+    <div v-if="!industry.acf.izquierda" @click="click()" class="uk-width-1-1 uk-flex uk-flex-middle industry-div uk-visible@m" :style="backgroundColor" style="height:100%;margin-left:0px;" data-aos="fade-left" uk-grid>
         <div class="uk-width-1-3">
           <p class="uk-text-center title-industry">{{industry.name}}</p>
           <p class="uk-text-center">Ver productos</p>
